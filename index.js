@@ -10,7 +10,7 @@ app.use(express.json())
 app.use('/api/v1/',gadget)
 app.listen(port,async()=>{
  
-    console.log(`${port},started to losten`)
+    console.log(`${port},started to listen`)
     await connectdb(process.env.MONGO_URI);
     console.log("database connnected ")
 })

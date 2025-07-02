@@ -7,7 +7,7 @@ const gadgetSchema= new mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["Available","Deployed","destroyed","decommisioned"]
+        enum:["Available","Deployed","Destroyed","Decommissioned"]
     }
 })
 
