@@ -84,4 +84,33 @@ const gadgetdel=async(req,res)=>{
     }
   }
 
-module.exports={gadgetinfo,create,singlegadget,random,gadgetdel,gadgetdetail};
+  const gadgetupdate = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const updatedGadget = await gadget.findByIdAndUpdate(id, updates, {
+      new: true,          // return the updated document
+      runValidators: true // validate fields based on schema
+    });
+
+    if (!updatedGadget) {
+      return res.status(404).json({ success: false, message: 'Gadget not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Gadget updated successfully',
+      data: updatedGadget
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while updating gadget',
+      error: error.message
+    });
+  }
+};
+
+module.exports={gadgetinfo,create,singlegadget,random,gadgetdel,gadgetdetail,gadgetupdate};
